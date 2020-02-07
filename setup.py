@@ -1,5 +1,5 @@
 from setuptools import setup
-from src.PySwitchCase.__version__ import version
+from src.PyTkBindings.__version__ import version
 
 
 
@@ -8,15 +8,15 @@ data_files = [
         'PySwitchCase/*.py'
         ]
 setup(
-        name='PySwitchCase',
+        name='PyTkBindings',
         version=version,
-        packages=['PySwitchCase'],
+        packages=['PyTkBindings'],
         url='https://github.com/Jakar510/PySwitchCase',
-        download_url='https://github.com/Jakar510/PySwitchCase/releases/tag/v1.0.2',
+        download_url='https://github.com/Jakar510/PythonTkinterBindings/',
         license='GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007',
         author='Tyler Stegmaier',
         author_email='tyler.stegmaier.510@gmail.com',
-        description='A pure python way to efficiently do a c++ style switch case in Python 3.6+.',
+        description='All Python Tkinter Bindings and helper functions.',
         install_requires=[],
         classifiers=[
             # How mature is this project? Common values are
@@ -39,10 +39,10 @@ setup(
 
             'Programming Language :: Python :: 3',
         ],
-        keywords='switch switch-case case',
-        package_dir={'PySwitchCase': 'src/PySwitchCase'},
+        keywords='bind tkinter-binding binding tkinter-bind python-tkinter python-tkinter-binding python-tkinter-bind',
+        package_dir={'PyTkBindings': 'src/PyTkBindings'},
         package_data={
-                'PySwitchCase': data_files,
+                'PyTkBindings': data_files,
             },
         )
 
