@@ -7,38 +7,41 @@ class _base_(object):
     def __ToList__(self):
         l = []
         for name in dir(self):
-            # if name in ['__ToDict__', '__ToList__', '__repr__', '__str__']: continue
-            if name.startswith('_'): continue
-            if callable(name): continue
+            if name == 'ToJson' or name.startswith('_') or callable(name): continue
             value = getattr(self, name)
             if hasattr(value, '__ToList__'):
                 value = value.__ToList__()
+
             elif isinstance(value, bytes):
                 value = value.decode()
+
             elif isinstance(value, list):
                 for item in value:
                     if isinstance(item, bytes):
                         value = item.decode()
                     else:
                         value = item
+
             l.append(value)
         return l
     def __ToDict__(self):
         d = { }
         for name in dir(self):
-            if name.startswith('_'): continue
-            if callable(name): continue
+            if name == 'ToJson' or name.startswith('_') or callable(name): continue
             value = getattr(self, name)
             if hasattr(value, '__ToDict__'):
                 value = value.__ToDict__()
+
             elif isinstance(value, bytes):
                 value = value.decode()
+
             elif isinstance(value, list):
                 for item in value:
                     if isinstance(item, bytes):
                         value = item.decode()
                     else:
                         value = item
+
             d[name] = value
         return d
     def __setattr__(self, key, value):
@@ -47,14 +50,195 @@ class _base_(object):
     def __setitem__(self, key, value):
         if not hasattr(self, key):
             super().__setattr__(key, value)
-    def __ToJson__(self, as_dict: bool = False, as_list: bool = False):
-        if as_dict:
-            return json.dumps(self.__ToDict__(), sort_keys=True, indent=4)
-        elif as_list:
-            return json.dumps(self.__ToList__(), sort_keys=True, indent=4)
+    def ToJson(self):
+        return json.dumps(self.__ToDict__(), sort_keys=True, indent=4)
 
 
-class KeyBindings(_base_):
+class Core_Bindings_MixIn(_base_):
+    Key = '<Key>'
+
+    Cancel = 'Cancel'
+    Shift_L = 'Shift_L'
+    Control_L = 'Control_L'
+    Alt_L = 'Alt_L'
+    Pause = 'Pause'
+    Caps_Lock = 'Caps_Lock'
+    Escape = 'Escape'
+    Prior = 'Prior'
+    Next = 'Next'
+    End = 'End'
+    Home = 'Home'
+    Left = 'Left'
+    Up = 'Up'
+    Right = 'Right'
+    Down = 'Down'
+    Print = 'Print'
+    Insert = 'Insert'
+    Num_Lock = 'Num_Lock'
+
+    Shift = 'Shift'
+    Tab = 'Tab'
+
+    Scroll_Lock = 'Scroll_Lock'
+    KP_Enter = 'KP_Enter'
+    KP_Subtract = 'KP_Subtract'
+    KP_Add = 'KP_Add'
+
+    BackSpace = 'BackSpace'
+    Delete = 'Delete'
+
+    Minus = 'minus'
+    Plus = 'plus'
+
+    Enter = 'Enter'
+    Return = 'Return'  # the Enter key
+
+    Shift_Up = '<Shift-Up>'
+    Shift_Down = '<Shift-Down>'
+    Shift_Right = '<Shift-Right>'
+    Shift_Left = '<Shift-Left>'
+
+    FocusIn = '<FocusIn>'
+    FocusOut = '<FocusOut>'
+    Enter_Boundary = '<Enter>'
+    Leave_Boundary = '<Leave>'
+
+class Special_Bindings_MixIn(_base_):
+    Configure = '<Configure>'
+    Activate = '<Activate>'
+    Deactivate = '<Deactivate>'
+    Destroy = '<Destroy>'
+    Expose = '<Expose>'
+    Map = "<Map>"
+    Unmap = '<Unmap>'
+    Motion = '<Motion>'
+    MouseWheel = '<MouseWheel>'
+    Visibility = '<Visibility>'
+
+class Numbers_Bindings_MixIn(_base_):
+    zero = '0'
+    one = '1'
+    two = '2'
+    three = '3'
+    four = '4'
+    five = '5'
+    six = '6'
+    seven = '7'
+    eight = '8'
+    nine = '9'
+
+class FunctionKey_Bindings_MixIn(_base_):
+    bindF1 = '<F1>'
+    F1 = 'F1'
+    bindF2 = '<F2>'
+    F2 = 'F2'
+    bindF3 = '<F3>'
+    F3 = 'F3'
+    bindF4 = '<F4>'
+    F4 = 'F4'
+    bindF5 = '<F5>'
+    F5 = 'F5'
+    bindF6 = '<F6>'
+    F6 = 'F6'
+    bindF7 = '<F7>'
+    F7 = 'F7'
+    bindF8 = '<F8>'
+    F8 = 'F8'
+    bindF9 = '<F9>'
+    F9 = 'F9'
+    bindF10 = '<F10>'
+    F10 = 'F10'
+    bindF11 = '<F11>'
+    F11 = 'F11'
+    bindF12 = '<F12>'
+    F12 = 'F12'
+
+class Letters_Bindings_MixIn(_base_):
+    a = 'a'
+    b = 'b'
+    c = 'c'
+    d = 'd'
+    e = 'e'
+    f = 'f'
+    g = 'g'
+    h = 'h'
+    i = 'i'
+    j = 'j'
+    k = 'k'
+    l = 'l'
+    m = 'm'
+    n = 'n'
+    o = 'o'
+    p = 'p'
+    q = 'q'
+    r = 'r'
+    s = 's'
+    t = 't'
+    u = 'u'
+    v = 'v'
+    w = 'w'
+    x = 'x'
+    y = 'y'
+    z = 'z'
+    A = 'A'
+    B = 'B'
+    C = 'C'
+    D = 'D'
+    E = 'E'
+    F = 'F'
+    G = 'G'
+    H = 'H'
+    I = 'I'
+    J = 'J'
+    K = 'K'
+    L = 'L'
+    M = 'M'
+    N = 'N'
+    O = 'O'
+    P = 'P'
+    Q = 'Q'
+    R = 'R'
+    S = 'S'
+    T = 'T'
+    U = 'U'
+    V = 'V'
+    W = 'W'
+    X = 'X'
+    Y = 'Y'
+    Z = 'Z'
+
+class Mouse_Bindings_MixIn(_base_):
+    Button = "<Button>"
+    Button1 = "<Button1>"
+    Button2 = "<Button2>"
+    Button3 = "<Button3>"
+
+    B1_Motion = '<B1-Motion>'
+    B2_Motion = '<B2-Motion>'
+
+    ButtonRelease = '<ButtonRelease>'
+    ButtonRelease1 = '<ButtonRelease-1>'
+    ButtonRelease2 = '<ButtonRelease-2>'
+    ButtonRelease3 = '<ButtonRelease-3>'
+
+    Double_Button = '<Double-Button>'
+    Double_Button2 = '<Double-Button-2>'
+    Double_Button3 = '<Double-Button-3>'
+
+class ListBox_Bindings_MixIn(_base_):
+    ListboxSelect = "<<ListboxSelect>>"
+
+class TreeView_Bindings_MixIn(_base_):
+    TreeViewSelect = "<<TreeviewSelect>>"
+
+class Custom_Bindings_MixIn(_base_):
+    ShiftTab = 'ShiftTab'
+    ShiftTabEvent = '<Shift-KeyPress-Tab>'
+class Other_Bindings_MixIn(_base_):
+    pass
+
+
+class All_Key_Bindings(_base_):
     """
         Made with help from:
             https://stackoverflow.com/a/32289245/9530917
@@ -149,174 +333,27 @@ a                 The user typed an “a”. Most printable characters can be us
 
 
     """
-    KP_Enter = 'KP_Enter'
-    KP_Subtract = 'KP_Subtract'
-    KP_Add = 'KP_Add'
-
-    BackSpace = 'BackSpace'
-    Delete = 'Delete'
-
-    Minus = 'minus'
-    Plus = 'plus'
-
-    Enter = 'Enter'
-    Return = 'Return'  # the Enter key
-
-    Shift_Up = '<Shift-Up>'
-    Shift_Down = '<Shift-Down>'
-    Shift_Right = '<Shift-Right>'
-    Shift_Left = '<Shift-Left>'
-
-    FocusIn = '<FocusIn>'
-    FocusOut = '<FocusOut>'
-    Enter_Boundary = '<Enter>'
-    Leave_Boundary = '<Leave>'
-
-    Shift = 'Shift'
-    Tab = 'Tab'
-    ShiftTab = 'ShiftTab'
-    ShiftTabEvent = '<Shift-KeyPress-Tab>'
-
-    Key = '<Key>'
-
-    Button = "<Button>"
-    Button1 = "<Button1>"
-    Button2 = "<Button2>"
-    Button3 = "<Button3>"
-
-    B1_Motion = '<B1-Motion>'
-    B2_Motion = '<B2-Motion>'
-
-    ButtonRelease = '<ButtonRelease>'
-    ButtonRelease1 = '<ButtonRelease-1>'
-    ButtonRelease2 = '<ButtonRelease-2>'
-    ButtonRelease3 = '<ButtonRelease-3>'
-
-    Double_Button = '<Double-Button>'
-    Double_Button2 = '<Double-Button-2>'
-    Double_Button3 = '<Double-Button-3>'
-
-
-    ListboxSelect = "<<ListboxSelect>>"
-    TreeViewSelect = "<<TreeviewSelect>>"
-    Configure = '<Configure>'
-    Activate = '<Activate>'
-    Deactivate = '<Deactivate>'
-    Destroy = '<Destroy>'
-    Expose = '<Expose>'
-    Map = "<Map>"
-    Unmap = '<Unmap>'
-    Motion = '<Motion>'
-    MouseWheel = '<MouseWheel>'
-    Visibility = '<Visibility>'
-
-    Cancel = 'Cancel '
-    Shift_L = 'Shift_L '
-    Control_L = 'Control_L '
-    Alt_L = 'Alt_L '
-    Pause = 'Pause'
-    Caps_Lock = 'Caps_Lock'
-    Escape = 'Escape'
-    Prior = 'Prior '
-    Next = 'Next '
-    End = 'End'
-    Home = 'Home'
-    Left = 'Left'
-    Up = 'Up'
-    Right = 'Right'
-    Down = 'Down'
-    Print = 'Print'
-    Insert = 'Insert'
-    Num_Lock = 'Num_Lock'
-    Scroll_Lock = 'Scroll_Lock'
-
-
-
-    bindF1 = '<F1>'
-    F1 = 'F1'
-    bindF2 = '<F2>'
-    F2 = 'F2'
-    bindF3 = '<F3>'
-    F3 = 'F3'
-    bindF4 = '<F4>'
-    F4 = 'F4'
-    bindF5 = '<F5>'
-    F5 = 'F5'
-    bindF6 = '<F6>'
-    F6 = 'F6'
-    bindF7 = '<F7>'
-    F7 = 'F7'
-    bindF8 = '<F8>'
-    F8 = 'F8'
-    bindF9 = '<F9>'
-    F9 = 'F9'
-    bindF10 = '<F10>'
-    F10 = 'F10'
-    bindF11 = '<F11>'
-    F11 = 'F11'
-    bindF12 = '<F12>'
-    F12 = 'F12'
-
-
-
-    a = 'a'
-    b = 'b'
-    c = 'c'
-    d = 'd'
-    e = 'e'
-    f = 'f'
-    g = 'g'
-    h = 'h'
-    i = 'i'
-    j = 'j'
-    k = 'k'
-    l = 'l'
-    m = 'm'
-    n = 'n'
-    o = 'o'
-    p = 'p'
-    q = 'q'
-    r = 'r'
-    s = 's'
-    t = 't'
-    u = 'u'
-    v = 'v'
-    w = 'w'
-    x = 'x'
-    y = 'y'
-    z = 'z'
-    A = 'A'
-    B = 'B'
-    C = 'C'
-    D = 'D'
-    E = 'E'
-    F = 'F'
-    G = 'G'
-    H = 'H'
-    I = 'I'
-    J = 'J'
-    K = 'K'
-    L = 'L'
-    M = 'M'
-    N = 'N'
-    O = 'O'
-    P = 'P'
-    Q = 'Q'
-    R = 'R'
-    S = 'S'
-    T = 'T'
-    U = 'U'
-    V = 'V'
-    W = 'W'
-    X = 'X'
-    Y = 'Y'
-    Z = 'Z'
-
+    core = Core_Bindings_MixIn()
+    special = Special_Bindings_MixIn()
+    numbers = Numbers_Bindings_MixIn()
+    functionKeys = FunctionKey_Bindings_MixIn()
+    letters = Letters_Bindings_MixIn()
+    custom = Custom_Bindings_MixIn()
+    mouse = Mouse_Bindings_MixIn()
+    listBox = ListBox_Bindings_MixIn()
+    treeView = TreeView_Bindings_MixIn()
 
 
     def __isEnter__(self, keysym: str) -> bool:
-        return keysym == self.Enter or keysym == self.KP_Enter or keysym == self.Return
+        return keysym == self.core.Enter or keysym == self.core.KP_Enter or keysym == self.core.Return
 
 
-Bindings = KeyBindings()
+Bindings = All_Key_Bindings()
+
+
+if __name__ == '__main__':
+    d = Bindings.ToJson()
+    print(d)
+
+
 
