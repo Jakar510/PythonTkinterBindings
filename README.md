@@ -2,8 +2,9 @@
 All Python Tkinter Bindings and helper functions
 
 
-#Object Structure
+##Object Structure
 
+'''javascript 
 {
     "core": {
         "Alt_L": "Alt_L",
@@ -38,17 +39,17 @@ All Python Tkinter Bindings and helper functions
         "Right": "Right",
         "Scroll_Lock": "Scroll_Lock",
         "Shift": "Shift",
-        "Shift_Down": "<Shift-Down>",
+        "Shift_Down": "\<Shift-Down>",
         "Shift_L": "Shift_L",
-        "Shift_Left": "<Shift-Left>",
-        "Shift_Right": "<Shift-Right>",
-        "Shift_Up": "<Shift-Up>",
+        "Shift_Left": "\<Shift-Left>",
+        "Shift_Right": "\<Shift-Right>",
+        "Shift_Up": "\<Shift-Up>",
         "Tab": "Tab",
         "Up": "Up"
     },
     "custom": {
         "ShiftTab": "ShiftTab",
-        "ShiftTabEvent": "<Shift-KeyPress-Tab>"
+        "ShiftTabEvent": "\<Shift-KeyPress-Tab\>"
     },
     "functionKeys": {
         "F1": "F1",
@@ -131,22 +132,22 @@ All Python Tkinter Bindings and helper functions
         "z": "z"
     },
     "listBox": {
-        "ListboxSelect": "<<ListboxSelect>>"
+        "ListboxSelect": "\<<ListboxSelect>\>"
     },
     "mouse": {
-        "B1_Motion": "<B1-Motion>",
-        "B2_Motion": "<B2-Motion>",
+        "B1_Motion": "\<B1-Motion\>",
+        "B2_Motion": "\<B2-Motion\>",
         "Button": "<Button>",
         "Button1": "<Button1>",
         "Button2": "<Button2>",
         "Button3": "<Button3>",
         "ButtonRelease": "<ButtonRelease>",
-        "ButtonRelease1": "<ButtonRelease-1>",
-        "ButtonRelease2": "<ButtonRelease-2>",
-        "ButtonRelease3": "<ButtonRelease-3>",
-        "Double_Button": "<Double-Button>",
-        "Double_Button2": "<Double-Button-2>",
-        "Double_Button3": "<Double-Button-3>"
+        "ButtonRelease1": "\<ButtonRelease-1\>",
+        "ButtonRelease2": "\<ButtonRelease-2\>",
+        "ButtonRelease3": "\<ButtonRelease-3\>",
+        "Double_Button": "\<Double-Button\>",
+        "Double_Button2": "\<Double-Button-2\>",
+        "Double_Button3": "\<Double-Button-3\>"
     },
     "numbers": {
         "eight": "8",
@@ -173,7 +174,8 @@ All Python Tkinter Bindings and helper functions
         "Visibility": "<Visibility>"
     },
     "treeView": {
-        "TreeViewSelect": "<<TreeviewSelect>>"
+        "TreeViewSelect": "\<<TreeviewSelect>\>"
     }
 }
+'''
 
